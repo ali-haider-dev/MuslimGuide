@@ -20,35 +20,13 @@ import IonIcon from "react-native-vector-icons/Ionicons";
 
 import VideoCard from "../../components/VideoCard";
 
-const Guide = ({navigation}) => {
-//   const [errorMessage, setErrorMessage] = useState("");
-//   const [isModalVisible, setModalVisible] = useState(false);
+const Guide = ({}) => {
 
-  const [filteredSpaces, setFilteredSpaces] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (text) => {
     setSearchQuery(text);
-    // filterData(text);
   };
-
-//   const filterData = (text) => {
-//     const filtered = spaces.filter((space) => {
-//       return (
-//         space.name.toLowerCase().includes(text.toLowerCase()) ||
-//         space.location.city.toLowerCase().includes(text.toLowerCase())
-//       );
-//     });
-//     setFilteredSpaces(filtered);
-//   };
-
- 
-
-
-
-
-
-  useEffect(() => {}, []);
 
   useEffect(() => {}, []);
 

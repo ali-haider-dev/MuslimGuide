@@ -5,7 +5,7 @@ import Slider from '@react-native-community/slider';
 import Orientation from 'react-native-orientation-locker';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+
 
 const Player = ({navigation,route}) => {
 const [videoUrl,setVideoUrl] = useState("") 
@@ -22,7 +22,7 @@ const [videoUrl,setVideoUrl] = useState("")
   const [play, setPlay] = useState(true);
   const ref = useRef();
 
-  // const navigation = useNavigation()
+
   const onBackPress = () => {
     navigation.goBack();
   };
@@ -53,12 +53,9 @@ const [videoUrl,setVideoUrl] = useState("")
             setProgress(x);
             
           }}
-          // Can be a URL or a local file.
-          //  ref={(ref) => {
-          //    this.player = ref
-          //  }}                                      // Store reference
-          onBuffer={e => setPlay(!play)} // Callback when remote video is buffering
-          //  onError={this.videoError}
+      
+          onBuffer={e => setPlay(!play)} 
+           onError={(e)=>console.log(e)}
 
           // Callback when video cannot be loaded
 
@@ -205,4 +202,4 @@ const [videoUrl,setVideoUrl] = useState("")
 
 export default Player;
 
-//http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+

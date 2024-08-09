@@ -1,13 +1,13 @@
-import {View, Text, TouchableOpacity, Touchable, Image} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
 
 const VideoCard = () => {
-  const [puased, setPaused] = useState(true);
+
   const navigation = useNavigation()
-  const ref = useRef();
+
 
   return (
     
