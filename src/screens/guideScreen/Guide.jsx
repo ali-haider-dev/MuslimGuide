@@ -61,6 +61,7 @@ const Guide = ({navigation}) => {
         backgroundColor: "#fff",
       }}
     >
+        <ScrollView>
       <View
         style={{
           paddingVertical: 10,
@@ -148,6 +149,9 @@ const Guide = ({navigation}) => {
         </View>
         <ScrollView horizontal contentContainerStyle={{ gap: 15 }}>
           <VideoCard/>
+          <VideoCard/>
+          <VideoCard/>
+        
         </ScrollView>
       </View>
       <View
@@ -165,7 +169,7 @@ const Guide = ({navigation}) => {
         </TouchableOpacity>
       </View>
       {/* Categories */}
-      <ScrollView>
+      <>
         <View style={{ flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
         <TouchableOpacity style={{ width: 90, height: 120 }}>
           <View
@@ -311,6 +315,7 @@ const Guide = ({navigation}) => {
         </TouchableOpacity>
         </View>
        
+      </>
       </ScrollView>
     </SafeAreaView>
   );

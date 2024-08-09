@@ -5,16 +5,26 @@ import Slider from '@react-native-community/slider';
 import Orientation from 'react-native-orientation-locker';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
-const Player = ({navigation}) => {
+const Player = ({navigation,route}) => {
+const [videoUrl,setVideoUrl] = useState("") 
+  useEffect(() => {
+    const videoUrl = route.params.videoUrl;
+     setVideoUrl(videoUrl)
+   console.log(videoUrl)
+  }, [])
+  
   const [clicked, setClicked] = useState(false);
   const [puased, setPaused] = useState(false);
   const [progress, setProgress] = useState(0);
   const [fullScreen, setFullScreen] = useState(false);
   const [play, setPlay] = useState(true);
   const ref = useRef();
+
+  // const navigation = useNavigation()
   const onBackPress = () => {
-    navigation.navigate('Guide');
+    navigation.goBack();
   };
   const format = seconds => {
     let mins = parseInt(seconds / 60)
@@ -23,7 +33,7 @@ const Player = ({navigation}) => {
     let secs = (Math.trunc(seconds) % 60).toString().padStart(2, '0');
     return `${mins}:${secs}`;
   };
-  
+
 
   return (
     <View style={{flex: 1}}>
@@ -35,12 +45,13 @@ const Player = ({navigation}) => {
         <Video
           paused={puased}
           source={{
-            uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            uri: videoUrl,
           }}
           ref={ref}
           onProgress={x => {
             // console.log(x)
             setProgress(x);
+            
           }}
           // Can be a URL or a local file.
           //  ref={(ref) => {
@@ -55,7 +66,7 @@ const Player = ({navigation}) => {
           resizeMode="contain"
         />
         {clicked &&
-          (play ? (
+          (
             <TouchableOpacity
               onPress={() => setClicked(!clicked)}
               style={{
@@ -80,19 +91,28 @@ const Player = ({navigation}) => {
                   onPress={() => {
                     setPaused(!puased);
                   }}>
-                  <Image
-                    source={
-                      puased
-                        ? require('../../assets/play-button.png')
-                        : require('../../assets/pause.png')
-                    }
-                    style={{
-                      width: 30,
-                      height: 30,
-                      tintColor: 'white',
-                      marginLeft: 50,
-                    }}
-                  />
+             
+             {!play ? <Image  source={require('../../assets/loader.gif')} style={{width: 30,
+                   height: 30,
+                   
+                   marginLeft: 50,backgroundColor:'transparent'}} />:
+                 
+                 <Image
+                 source={
+                   puased
+                     ? require('../../assets/play-button.png')
+                     : require('../../assets/pause.png')
+                 }
+                 style={{
+                   width: 30,
+                   height: 30,
+                   tintColor: 'white',
+                   marginLeft: 50,
+                 }}
+               />
+             
+             }
+                
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -133,7 +153,7 @@ const Player = ({navigation}) => {
                   onValueChange={x => {
                     ref.current.seek(x);
                   }}
-                value={1}
+                value={ parseInt(progress.currentTime)}
                 />
                 <Text style={{color: 'white'}}>
                   {format(progress.seekableDuration)}
@@ -176,19 +196,7 @@ const Player = ({navigation}) => {
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
-          ) : (
-            <View
-              style={{
-                width: '100%',
-                height: '100%',
-                position: 'absolute',
-                backgroundColor: 'rgba(0,0,0,.5)',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-             <Image  source={require('../../assets/loader.gif')} style={{width:20,height:20}}/>
-            </View>
-          ))}
+          ) }
       </TouchableOpacity>
       <View style={{padding:10}}><Text style={{color:'black'}}>Video Details</Text></View>
     </View>
